@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     try {
       if(currentState == 'Signup'){
-        const respones=await axios.post('http://localhost:8000/api/user/registor',{name,email,password})
+        const respones=await axios.post(BackendUrl+'/api/user/registor',{name,email,password})
         if(respones.data.success){
           setToken(respones.data.token)
           toast.success("REGISTOR SUCCESSFULLY DONE")
@@ -27,7 +27,7 @@ const Login = () => {
           toast.error(respones.data.message)
         }
       }else{
-        const respones=await axios.post('http://localhost:8000/api/user/login',{email,password})
+        const respones=await axios.post(BackendUrl+'/api/user/login',{email,password})
         if(respones.data.success){
           setToken(respones.data.token)
           toast.success("LOGIN SUCCESSFULLY DONE")

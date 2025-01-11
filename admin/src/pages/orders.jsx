@@ -4,8 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { assets } from '../../../frontend/src/assets/admin_assets/assets'
-import { useContext } from 'react'
-import { ShopContext } from '../../../frontend/src/context/ShopContext'
+import { BackendUrl } from '../App'
 
 const Orders = ({ token }) => {
   const currency='$';
@@ -18,7 +17,7 @@ const Orders = ({ token }) => {
     }
 
     try {
-      const respones = await axios.post('http://localhost:8000/api/order/list', {}, { headers: { token } })
+      const respones = await axios.post(`${BackendUrl}/api/order/list`,{}, { headers: { token } })
       // console.log(respones)
       if (respones.data.success) {
         setOrders(respones.data.orders)
@@ -34,7 +33,7 @@ const Orders = ({ token }) => {
 
   const StatusHandler=async(event,orderId)=>{
     try {
-      const respones=await axios.post('http://localhost:8000/api/order/status',{orderId,status:event.target.value},{headers:{token}})
+      const respones=await axios.post(`${BackendUrl}/api/order/status`,{orderId,status:event.target.value},{headers:{token}})
       if(respones.data.success){
         await fetchAllOrders()
         toast.success(respones.data.message)

@@ -44,7 +44,7 @@ const ShopContextProvider=({children})=>{
 
         if(token){
             try {
-               const respones= await axios.post('http://localhost:8000/api/cart/add',{itemId,size},{headers:{token}})
+               const respones= await axios.post(BackendUrl+'/api/cart/add',{itemId,size},{headers:{token}})
                if(respones.data.success){
                     toast.success(respones.data.message)
                     // setCartItems(cartData)
@@ -84,7 +84,7 @@ const ShopContextProvider=({children})=>{
         setCartItems(cartData);
 
         try {
-            const respones=await axios.post('http://localhost:8000/api/cart/update',{itemId,size,quantity},{headers:{token}})
+            const respones=await axios.post(BackendUrl+'/api/cart/update',{itemId,size,quantity},{headers:{token}})
             if(respones.data.success)
             {
                 toast.success(respones.data.message)
@@ -120,7 +120,7 @@ const ShopContextProvider=({children})=>{
 
     const getProductData=async()=>{
         try {
-            const respones=await axios.get('http://localhost:8000/api/product/list')
+            const respones=await axios.get(BackendUrl+'/api/product/list')
 
             console.log(respones.data.product)
             if(respones.data.success){
@@ -138,7 +138,7 @@ const ShopContextProvider=({children})=>{
         try {
             
             const respones = await axios.post(
-                'http://localhost:8000/api/cart/get',
+                BackendUrl+'/api/cart/get',
                 {},
                 {
                     headers: { token }, // Ensure the token is valid

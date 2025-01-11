@@ -5,7 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Orders = () => {
-  const { token, currency ,navigate} = useContext(ShopContext);
+  const { token, currency ,navigate,BackendUrl} = useContext(ShopContext);
   const [orderData,setOrderData]=useState([])
   
   const LoadOrderData=async()=>{
@@ -14,7 +14,7 @@ const Orders = () => {
         return null
       }
 
-      const respones=await axios.post('http://localhost:8000/api/order/userOrder',{ },{headers:{token}})
+      const respones=await axios.post(BackendUrl+'/api/order/userOrder',{ },{headers:{token}})
       
       if(respones.data.success){
         let allordersItem=[]
