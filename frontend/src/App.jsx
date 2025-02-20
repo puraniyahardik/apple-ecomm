@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import SearchBar from './components/SearchBar'
 import { ToastContainer, toast } from 'react-toastify';
 import Verify from './pages/Verify'
+import Chatbot from './components/Chatbot'
 
 function App() {
  
@@ -35,6 +36,7 @@ function App() {
         <Route path='/verify' element={<Verify/>}/>
       </Routes>
       <Footer/>
+      <Chatbot />
     </div>
   )
 }
