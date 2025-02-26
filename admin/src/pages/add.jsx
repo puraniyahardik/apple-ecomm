@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { BackendUrl } from '../App'
+import { backendUrl } from '../App'
 import { assets } from '../assets/admin_assets/assets'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+
 const Add = ({token}) => {
  //state variable for forms
   const [image1,setImage1]=useState(false)
@@ -16,8 +17,8 @@ const Add = ({token}) => {
   const [name,setName]=useState('');
   const [description,setDescription]=useState('');
   const [price,setPrice]=useState('');
-  const [category,setCategory]=useState('Men');
-  const [subCategory,setSubCategory]=useState('Topwear');
+  const [category,setCategory]=useState('Plus');
+  const [subCategory,setSubCategory]=useState('Black');
   const [bestseller,setBestseller]=useState(false);
   const [sizes,setSizes]=useState([]);
 
@@ -45,7 +46,7 @@ const Add = ({token}) => {
 
     //api to send  data
 
-    const respone = await axios.post(BackendUrl + '/api/product/add',formData,{headers:{token}})
+    const respone = await axios.post(backendUrl + '/api/product/add',formData,{headers:{token}})
     console.log(respone)
 
     if(respone.data.success)
@@ -54,8 +55,8 @@ const Add = ({token}) => {
       setName('')
       // setDescription('')
       setPrice('')
-      setCategory('Men')
-      setSubCategory('Topwear')
+      setCategory('Plus')
+      setSubCategory('Black')
       setSizes([])
       setBestseller(false)
       setImage1(false)
@@ -113,25 +114,25 @@ const Add = ({token}) => {
         <div >
           <p className=' mb-2 '>Category</p>
           <select className=' w-full px-3 py-2' onChange={(e)=>setCategory(e.target.value)}>
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-            <option value="Kids">Kids</option>
+            <option value="Plus">Plus</option>
+            <option value="Pro">Pro</option>
+            <option value="Pro Max">Pro Max</option>
           </select>
         </div>
 
         
         <div >
-          <p className=' mb-2 '>Subcategory</p>
+          <p className=' mb-2 '>Color</p>
           <select className=' w-full px-3 py-2' onChange={(e)=>setSubCategory(e.target.value)}>
-            <option value="Topwear">Topwear</option>
-            <option value="Bottomwear">Bottomwear</option>
-            <option value="Winterwear">Winterwear</option>
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+            <option value="Blue">Blue</option>
           </select>
         </div>
         
         <div>
           <p className=' mb-2' >Product Price</p>
-          <input type="number" onChange={(e)=>setPrice(Number(e.target.value))} className=' w-full px-3 py-2 sm:w-[120px]' placeholder='25' />
+          <input type="number" onChange={(e)=>setPrice(Number(e.target.value))} className=' w-full px-3 py-2 sm:w-[120px]' placeholder='10000' />
         </div>
 
       </div>
@@ -139,20 +140,23 @@ const Add = ({token}) => {
       <div>
         <p className=' mb-2'>Product Sizes</p>
         <div className=' flex gap-3'>
-          <div onClick={()=>setSizes(prev=>prev.includes("S") ? prev.filter(item=>item!=="S") : [...prev,"S"])}>
-            <p className={` px-3 py-1 cursor-pointer ${sizes.includes("S") ? 'bg-pink-100': 'bg-slate-200'}  `}>S</p>
+          <div onClick={()=>setSizes(prev=>prev.includes("32Gb") ? prev.filter(item=>item!=="32Gb") : [...prev,"32Gb"])}>
+            <p className={` px-3 py-1 cursor-pointer ${sizes.includes("32Gb") ? 'bg-pink-100 dark:bg-pink-300': 'bg-slate-200'}  `}>32 GB</p>
           </div>
-          <div onClick={()=>setSizes(prev=>prev.includes("M") ? prev.filter(item=>item!=="M") : [...prev,"M"])} >
-            <p className={` px-3 py-1 cursor-pointer ${sizes.includes("M") ? 'bg-pink-100': 'bg-slate-200'}  `}>M</p>
+          <div onClick={()=>setSizes(prev=>prev.includes("64Gb") ? prev.filter(item=>item!=="64Gb") : [...prev,"64Gb"])}>
+            <p className={` px-3 py-1 cursor-pointer ${sizes.includes("64Gb") ? 'bg-pink-100 dark:bg-pink-300': 'bg-slate-200'}  `}>64 GB</p>
           </div>
-          <div onClick={()=>setSizes(prev=>prev.includes("L") ? prev.filter(item=>item!=="L") : [...prev,"L"])}>
-            <p className={` px-3 py-1 cursor-pointer ${sizes.includes("L") ? 'bg-pink-100': 'bg-slate-200'}  `}>L</p>
+          <div onClick={()=>setSizes(prev=>prev.includes("128Gb") ? prev.filter(item=>item!=="128Gb") : [...prev,"128Gb"])} >
+            <p className={` px-3 py-1 cursor-pointer ${sizes.includes("128Gb") ? 'bg-pink-100 dark:bg-pink-300': 'bg-slate-200'}  `}>128 GB</p>
           </div>
-          <div onClick={()=>setSizes(prev=>prev.includes("XL") ? prev.filter(item=>item!=="XL") : [...prev,"XL"])}>
-            <p className={` px-3 py-1 cursor-pointer ${sizes.includes("XL") ? 'bg-pink-100': 'bg-slate-200'}  `}>XL</p>
+          <div onClick={()=>setSizes(prev=>prev.includes("256Gb") ? prev.filter(item=>item!=="256Gb") : [...prev,"256Gb"])}>
+            <p className={` px-3 py-1 cursor-pointer ${sizes.includes("256Gb") ? 'bg-pink-100 dark:bg-pink-300': 'bg-slate-200'}  `}>256 GB</p>
           </div>
-          <div onClick={()=>setSizes(prev=>prev.includes("XXL") ? prev.filter(item=>item!=="XXL") : [...prev,"XXL"])}>
-            <p className={` px-3 py-1 cursor-pointer ${sizes.includes("XXL") ? 'bg-pink-100': 'bg-slate-200'}  `}>XXL</p>
+          <div onClick={()=>setSizes(prev=>prev.includes("512Gb") ? prev.filter(item=>item!=="512Gb") : [...prev,"512Gb"])}>
+            <p className={` px-3 py-1 cursor-pointer ${sizes.includes("512Gb") ? 'bg-pink-100 dark:bg-pink-300': 'bg-slate-200'}  `}>512 GB</p>
+          </div>
+          <div onClick={()=>setSizes(prev=>prev.includes("1Tb") ? prev.filter(item=>item!=="1Tb") : [...prev,"1Tb"])}>
+            <p className={` px-3 py-1 cursor-pointer ${sizes.includes("1Tb") ? 'bg-pink-100 dark:bg-pink-300': 'bg-slate-200'}  `}>1 TB</p>
           </div>
         </div>
       </div>

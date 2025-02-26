@@ -13,19 +13,20 @@ const About = () => {
 
       <div className="my-10 flex flex-col md:flex-row gap-16">
         <img
-          className="w-full md:max-w-[450px]"
-          src={assets.about_img}
+          className="w-full md:max-w-[450px] sm:max-w-[300px] sm:bg-contain bg-cover"
+          src="https://images.unsplash.com/photo-1630673287511-4d477913d7a0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt=""
         />
         <div className="flex flex-col justify-center gap-6 md:w-2/4 text-gray-600">
           <p>
-            Forever was born out of a passion for innovation and a desire to revolutionize the way people shop online. Our journey began with a simple idea: to provide a platform where customers can easily discover, explore, and purchase a wide range of products from the comfort of their homes.
+          Apple was born out of a passion for innovation and a commitment to redefining the online shopping experience for Apple enthusiasts. Our journey began with a simple vision: to create a seamless and trustworthy platform where customers can explore, compare, and purchase the latest Apple products with confidence.
           </p>
           <p>
-            Since our inception, we've worked tirelessly to curate a diverse selection of high-quality products that cater to every taste and preference. From fashion and beauty to electronics and home essentials, we offer an extensive collection sourced from trusted brands and suppliers          </p>
+          At Apple, we are more than just an e-commerce store—we are a destination for those who appreciate cutting-edge technology, elegant design, and seamless performance. Whether you’re looking for the latest iPhone, iPad, Mac, Apple Watch, or accessories, we bring you an extensive selection sourced directly from Apple and authorized suppliers.
+          </p>
           <b className="text-gray-800">Our Mission</b>
           <p>
-            Our mission at Forever is to empower customers with choice, convenience, and confidence. We're dedicated to providing a seamless shopping experience that exceeds expectations, from browsing and ordering to delivery and beyond.
+            Our mission at Apple is to empower customers with choice, convenience, and confidence. We're dedicated to providing a seamless shopping experience that exceeds expectations, from browsing and ordering to delivery and beyond.
           </p>
         </div>
       </div>

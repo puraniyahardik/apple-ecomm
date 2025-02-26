@@ -19,15 +19,15 @@ const Contact = () => {
         <div className="flex flex-col justify-center items-start gap-6">
           <p className="font-semibold text-xl text-gray-600">Our Store</p>
           <p className="text-gray-500">
-          Rajhans Aron, Shop No 2, <br />
-             Lal Bungalow, Athwalines, opposite Surat Civil Court.
+          Puraniya Hardik, Shop No 2, <br />
+          Lal Bungalow, Athwalines, opposite Surat Civil Court.
           </p>
           <p className="text-gray-500">
-            Tel: (+91) 9979033075 <br />
-            Email: neelpatel6340@gmail.com
+            Tel: (+91) 92655 56357 <br />
+            Email: subhampuraniya7@gmail.com
           </p>
           <p className="font-semibold text-xl text-gray-600">
-            Careers at Forever
+            Careers at Apple
           </p>
           <p className="text-gray-500">
             Learn more about our teams and job openings.

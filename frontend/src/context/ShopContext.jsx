@@ -17,7 +17,9 @@ const ShopContextProvider=({children})=>{
     let  [token,setToken]=useState('')
     const [cartItems,setCartItems]=useState({});
     const [data,setData]=useState([])
-
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        return localStorage.getItem('theme') === 'dark'
+    });
     const addToCart=async(itemId,size)=>{
         let cartData=structuredClone(cartItems);
 
@@ -154,7 +156,18 @@ const ShopContextProvider=({children})=>{
         }
     }
     
-    
+    const toggleDarkMode = () => {
+        setIsDarkMode((prev) =>  !prev)}
+    useEffect(() => {
+        if (isDarkMode) {
+            document.documentElement.classList.add('dark');
+
+        } else {
+            document.documentElement.classList.remove('dark');
+
+        }
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    }, [isDarkMode]);
      
     useEffect(()=>{
         getProductData();
@@ -185,9 +198,46 @@ const ShopContextProvider=({children})=>{
             // Call getUserCart only when token is available
         }
     }, [token]); 
+
+    // useEffect( () => {
+    //    localStorage.setItem('dark',isDarkMode);
+    // }, [isDarkMode]);
+
+    // useEffect( () => {
+    // const dark = localStorage.getItem('dark');
+    // dark ? setIsDarkMode(true) : setIsDarkMode(false);
+    // }, []);
+
+
+    //logout 
+    const Logout = () => {
+        navigate('/login')
+        localStorage.removeItem('token')
+        setToken('')
+        setCartItems({})
+    }
+
+
+    const forgotPasswordRequest = async (email) => {
+        console.log('Sending forgot password request for:', email);
+        try {
+          const response = await axios.post(`${BackendUrl}/api/user/forgot-password`, { email });
+          console.log('Forgot Password Response:', response.data);
+          if (response.data.success) {
+            toast.success(response.data.message, { autoClose: 5000 }); // Ensure visibility
+          } else {
+            toast.error(response.data.message);
+          }
+        } catch (error) {
+          console.error('Forgot Password Error:', error.response?.data || error.message);
+          toast.error(error.response?.data?.message || 'Failed to send reset link');
+        }
+      };
    
     const value={
         products,
+        forgotPasswordRequest,
+        Logout,
         currency,
         delivery_fee,
         search,
@@ -205,7 +255,10 @@ const ShopContextProvider=({children})=>{
         setToken,
         setCartItems,
         setData,
-        data
+        data,
+        isDarkMode,
+        setIsDarkMode,
+        toggleDarkMode
     }
 
     return (

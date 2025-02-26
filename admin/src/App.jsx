@@ -1,47 +1,58 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
-import { Route, Routes } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Add from './pages/add'
 import List from './pages/list'
-import Orders from './pages/orders'
-import Login from './components/Login'
-import { ToastContainer, toast } from 'react-toastify';
+import Oders from './pages/orders'
+import Login from './components/Login';
+import {ToastContainer} from 'react-toastify'
+import { ShopContext } from './context/AppContext'
 
-export const BackendUrl=import.meta.env.VITE_BACKEND_URL;
-function App() {
-  // const [count, setCount] = useState(0)
-  const [token,setToken]=useState('');
+//for accesing backend to use these url 
+/////
+export const backendUrl = import.meta.env.VITE_BACKEND_URL;
+export const currency = '$'
+///////
+const App = () => {
+  const { isDarkMode } = useContext(ShopContext);
 
-  // console.log(BackendUrl)
+  const [token, setToken] = useState(
+    localStorage.getItem('token')
+    ? localStorage.getItem('token')
+    : '');
+
+  useEffect(()=>{
+    localStorage.setItem('token',token);
+  },[token])
+
 
   return (
-    <div className=' bg-gray-50 min-h-screen'>
-      <ToastContainer />
-       {
-        token === "" ? <Login  setToken={setToken}/> :
-        <>
-        <Navbar />
-        <hr />
-        <div className=" flex w-full">
-         <Sidebar />
-         <div className=' w-[70%] mx-auto ml-[max(5px,25px)] my-8 text-gray-600 text-base '>
-           <Routes >
-             <Route path='/add' element={<Add  token={token}/>} />
-             <Route path='/list' element={<List token={token}/>} />
-             <Route path='/orders' element={<Orders token={token}/>} />
-           </Routes>
-   
-         </div>
-        </div>
+    <div className={isDarkMode ? "dark" : ''}>
+      <div className="bg-white dark:bg-[#151013] text-black dark:text-white min-h-screen ">
+        <ToastContainer />
+        {token === ""
+          ? <Login setToken={setToken} />
+          : <>
+            <Navbar setToken={setToken} />
+            <hr /><hr /><hr />
+
+            <div className='flex w-full'>
+              <Sidebar />
+              <div className='w-[70%] mx-auto ml-[max(5vw,25px)] my-8 text-gray-600 text-base'>
+                <Routes>
+                  <Route path='/add' element={ <Add token={token} />} />
+                  <Route path='/list' element={<List token={token}/>} />
+                  <Route path='/orders' element={<Oders token={token}/>} />
+                </Routes>
+              </div>
+            </div>
           </>
-       }
-    
+        }
+      </div>
     </div>
   )
 }
 
 export default App
+

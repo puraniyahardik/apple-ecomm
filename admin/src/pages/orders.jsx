@@ -4,7 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { assets } from '../../../frontend/src/assets/admin_assets/assets'
-import { BackendUrl } from '../App'
+import { backendUrl } from '../App'
 
 const Orders = ({ token }) => {
   const currency='$';
@@ -17,7 +17,7 @@ const Orders = ({ token }) => {
     }
 
     try {
-      const respones = await axios.post(`${BackendUrl}/api/order/list`,{}, { headers: { token } })
+      const respones = await axios.post(`${backendUrl}/api/order/list`,{}, { headers: { token } })
       // console.log(respones)
       if (respones.data.success) {
         setOrders(respones.data.orders)

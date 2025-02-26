@@ -75,7 +75,7 @@
 
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { BackendUrl } from '../App';
+import { backendUrl } from '../App';
 import { toast } from 'react-toastify';
 
 
@@ -84,7 +84,7 @@ const List = ({ token }) => {
 
   const fetchList = async () => {
     try {
-      const response = await axios.get(`${BackendUrl}/api/product/list`, {
+      const response = await axios.get(`${backendUrl}/api/product/list`, {
         headers: { Authorization: `Bearer ${token}` }, // If token is needed for authentication
       });
       console.log(response);

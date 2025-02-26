@@ -1,47 +1,56 @@
+import axios from 'axios';
 import React, { useState } from 'react'
-import axios from 'axios'
-import { BackendUrl } from '../App';
+import { backendUrl } from '../App';
 import { toast } from 'react-toastify';
-// const Email=import.meta.env.VITE_ADMIN_EMAIL;
-// const Password=import.meta.env.VITE_ADMIN_PASSWORD;
+
 const Login = ({setToken}) => {
-    const [email,setEmail]=useState('');
-    const [password,setPassword]=useState('')
-    const onSumbitHandler=async(e)=>{
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+ const  onsubmitHandler= async (e)=>{
         try {
-            e.preventDefault()
-            const respones=await axios.post(BackendUrl+'/api/user/admin',{email,password})
+            e.preventDefault(); 
+            const res = await axios.post( backendUrl + '/api/user/admin' , { email, password });
+            console.log(res);
 
-            console.log(respones)
-
-            if(respones.data.success)
-            {
-                setToken(respones.data.token)
+            if (res.data.success) {
+                setToken(res.data.token); 
             }
             else{
-                toast.error(respones.data.message)
-            }
+                toast.error(res.data.message);
+            }  
         } catch (error) {
+            console.log(error);
+            toast.error(error);
             
         }
     }
   return (
-    <div className=' flex w-full items-center justify-center min-h-screen '>
-      <div className=' bg-white shadow-md rounded-lg px-8 py-6 max-w-md'>
-        <h1 className=' text-2xl font-bold mb-4'>Admin Panel</h1>
-        <form action="" onSubmit={onSumbitHandler}>
-            <div className=' mb-3 min-w-72'>
-                 <p className=' text-sm font-medium text-gray-700 mb-2'>Email Address</p>
-                <input className=' rounded-md w-full px-3 py-2 border border-gray-300 outline-none' type="email" placeholder='your@gmail.com' required onChange={(e)=>setEmail(e.target.value)} value={email}/>
-            </div>
-            <div className=' mb-3 min-w-72'>
-                 <p className=' text-sm font-medium text-gray-700 mb-2'>Password</p>
-                <input className=' rounded-md w-full px-3 py-2 border border-gray-300 outline-none' type="password" placeholder='Enter Your Password' required  onChange={(e)=>setPassword(e.target.value)} value={password}/>
+    <div className='flex items-center min-h-screen justify-center w-full'>
+        <div className='bg-slate-400 shadow-md rounded-lg px-8 py-6  max-w-md'>
+            <h1 className='text-2xl text-center font-bold mb-5'>Admin Penal</h1>
+            <form onSubmit={onsubmitHandler}>
+                <div className='mb-3 min-w-72'>
+                    <p className='text-sm font-bold dark:text-white text-gray-700 mb-2' >Email</p>
+                    <input
+                    onChange={(e)=> setEmail(e.target.value)}
+                    value={email}  
+                    autocomplete="current-password"
+                    className='rounded-md w-full px-3 py-2 border text-black  border-gray-400 outline-none' type="email" placeholder='example@gmail.com' required/>
+                </div> 
+                <div className='mb-3 min-w-72'>
+                    <p className='text-sm  dark:text-white font-bold text-gray-700 mb-2' >Password</p>
+                    <input 
+                    onChange={(e)=> setPassword(e.target.value)}
+                    value={password}
+                    autocomplete="current-password"
+                    className='text-black rounded-md w-full px-3 py-2 border border-gray-400 outline-none' type="password" placeholder='Enter Your Password' 
+                    />
+                </div>
 
-            </div>
-            <button type="submit" className=' mt-2 w-full py-2 px-4 rounded-md bg-black text-white'>Login</button>
-        </form>
-      </div>
+                <button className='mt-2 font-semibold w-full py-2 px-5 rounded-md to-white bg-slate-700' type='submit'>Login</button>
+            </form>
+        </div>
     </div>
   )
 }
