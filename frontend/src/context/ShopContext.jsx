@@ -6,7 +6,7 @@ import axios from "axios"
 
 export const ShopContext=createContext();
 
-const ShopContextProvider=({children})=>{
+const ShopContextProvider=({ children })=>{
     const navigate=useNavigate()
     const currency="$";
     const delivery_fee=10;
@@ -210,6 +210,7 @@ const ShopContextProvider=({children})=>{
 
 
     //logout 
+   
     const Logout = () => {
         navigate('/login')
         localStorage.removeItem('token')

@@ -102,7 +102,7 @@ const List = ({ token }) => {
   const deleteProductData=async(id)=>{
     try {
 
-      const respone=await axios.post(BackendUrl+'/api/product/remove',{id},{headers:{token}})
+      const respone=await axios.post(backendUrl+'/api/product/remove',{id},{headers:{token}})
       console.log(respone)
       if(respone.data.success)
       {

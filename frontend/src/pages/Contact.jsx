@@ -19,12 +19,12 @@ const Contact = () => {
         <div className="flex flex-col justify-center items-start gap-6">
           <p className="font-semibold text-xl text-gray-600">Our Store</p>
           <p className="text-gray-500">
-          Puraniya Hardik, Shop No 2, <br />
+          Vekariya Parth, Shop No 2, <br />
           Lal Bungalow, Athwalines, opposite Surat Civil Court.
           </p>
           <p className="text-gray-500">
             Tel: (+91) 92655 56357 <br />
-            Email: subhampuraniya7@gmail.com
+            Email: parthvekariya302@gmail.com
           </p>
           <p className="font-semibold text-xl text-gray-600">
             Careers at Apple

@@ -8,9 +8,9 @@ import { toast } from 'react-toastify'
 
 const Placeorder = () => {
   const {navigate,token,cartItems,setCartItems,getCartAmount,delivery_fee,products,BackendUrl} = useContext(ShopContext)
-  const [method,setMothod]=useState('cod');
+  const [method, setMethod]=useState('cod');
   
-  const [fromData,setFromData]=useState({
+  const [formData, setFormData]=useState({
     firstName:'',
     lastName:'',
     email:'',
@@ -22,16 +22,18 @@ const Placeorder = () => {
     phone:''
   })
 
-  const OnchangeHandler=(e)=>{
+  const onChangeHandler = (e) =>{
     const name=e.target.name
     const value=e.target.value
 
-    setFromData(data=>({...data,[name]:value}))
+    setFormData(data=>({...data,[name]:value}))
     
   }
 
   const initPay=(order)=>{
+
     const options={
+
       key:import.meta.env.VITE_RAZORPAY_ID,
       amount:order.amount,
       currency:order.currency,
@@ -58,7 +60,7 @@ const Placeorder = () => {
     const rzp=new window.Razorpay(options)
     rzp.open()
   }
-  const onSumbitHandler=async(e)=>{
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
       let orderItems=[]
@@ -77,9 +79,9 @@ const Placeorder = () => {
       }
       
       let OrderData={
-        address:fromData,
+        address:formData,
         items:orderItems,
-        amount:getCartAmount()+delivery_fee
+        amount:getCartAmount() + delivery_fee
       }
       console.log(OrderData)
 
@@ -116,7 +118,8 @@ const Placeorder = () => {
       }
       
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      toast.error(error.message || 'Failed to place order');
     }
   
   }
@@ -153,30 +156,29 @@ const Placeorder = () => {
   // console.log(data)
 
   return (
-    <form className=' flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t' onSubmit={onSumbitHandler}>
+    <form className=' flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t' onSubmit={onSubmitHandler}>
      {/* Left Side */}
      {/* <form action="" className='flex justify-evenly items-center gap-20' onClick={(e)=>e.preventDefault()}> */}
       <div className=" flex flex-col gap-4 w-full sm:max-w-[480px]">
           <div className=" text-xl sm:text-2xl my-3">
             <Title text1={'DELIVERY'} text2={'INFORMATION'} />
+          </div>
 
-          </div>
-          
           <div className="flex gap-3">
-            <input onChange={OnchangeHandler} name='firstName' value={fromData.firstName} type="text" placeholder='First Name' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
-            <input onChange={OnchangeHandler} name='lastName' value={fromData.lastName} type="text" placeholder='Last Name' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
+            <input onChange={onChangeHandler} name='firstName' value={formData.firstName} type="text" placeholder='First Name' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
+            <input onChange={onChangeHandler} name='lastName' value={formData.lastName} type="text" placeholder='Last Name' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
           </div>
-          <input onChange={OnchangeHandler} name='email' value={fromData.email} type="Email" placeholder='Email Address' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
-          <input onChange={OnchangeHandler} name='street' value={fromData.street} type="text" placeholder='Street' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
+          <input onChange={onChangeHandler} name='email' value={formData.email} type="Email" placeholder='Email Address' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
+          <input onChange={onChangeHandler} name='street' value={formData.street} type="text" placeholder='Street' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
           <div className="flex gap-3">
-            <input onChange={OnchangeHandler} name='city' value={fromData.city} type="text" placeholder='City' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
-            <input onChange={OnchangeHandler} name='state' value={fromData.state} type="text" placeholder='State' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
+            <input onChange={onChangeHandler} name='city' value={formData.city} type="text" placeholder='City' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
+            <input onChange={onChangeHandler} name='state' value={formData.state} type="text" placeholder='State' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
           </div>
           <div className="flex gap-3">
-            <input onChange={OnchangeHandler} name='zipcode' value={fromData.zipcode} type="number" placeholder='ZipCode' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
-            <input onChange={OnchangeHandler} name='country' value={fromData.country} type="text" placeholder='Country' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
+            <input onChange={onChangeHandler} name='zipcode' value={formData.zipcode} type="number" placeholder='ZipCode' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
+            <input onChange={onChangeHandler} name='country' value={formData.country} type="text" placeholder='Country' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
           </div>
-          <input onChange={OnchangeHandler} name='phone' value={fromData.phone} type="number" placeholder='Phone' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
+          <input onChange={onChangeHandler} name='phone' value={formData.phone} type="number" placeholder='Phone' className=' border border-gray-300 rounded py-1.5 px-3.5 w-full '  />
        
       </div>   
      {/* Right SIde */}
@@ -188,15 +190,23 @@ const Placeorder = () => {
         <Title  text1={"PAYMENT"} text2={"METHOD"}/>
         {/* ---------Payment Method Selection---------- */}
         <div className=' flex gap-3 flex-col lg:flex-row'>
-          <div  onClick={()=>setMothod('stripe')} className=" flex items-center gap-3 border p-2 px-3 cursor-pointer">
+
+          <div  onClick={()=>setMethod('stripe')} className=" flex items-center gap-3 border p-2 px-3 cursor-pointer">
             <p className={`min-w-3.5 h-3.5 border rounded-full ${method=='stripe' ? ' bg-green-500':''}`}></p>
             <img src={assets.stripe_logo} className=' h-5 mx-4' alt="" />
           </div>
-          <div onClick={()=>setMothod('razorpay')} className=" flex items-center gap-3 border p-2 px-3 cursor-pointer">
-            <p className={`min-w-3.5 h-3.5 border rounded-full  ${method=='razorpay' ? ' bg-green-500':''}`}></p>
+
+          <div  onClick={()=>setMethod('razorpay')} className=" flex items-center gap-3 border p-2 px-3 cursor-pointer">
+            <p className={`min-w-3.5 h-3.5 border rounded-full ${method=='razorpay' ? ' bg-green-500':''}`}></p>
             <img src={assets.razorpay_logo} className=' h-5 mx-4' alt="" />
           </div>
-          <div onClick={()=>setMothod('cod')} className=" flex items-center gap-3 border p-2 px-3 cursor-pointer">
+
+          {/* <div onClick={()=>setMethod('razorpay')} className=" flex items-center gap-3 border p-2 px-3 cursor-pointer">
+            <p className3={`min-w-3.5 h-3.5 border rounded-full  ${method=='razorpay' ? 'bg-green-500':''}`}></p>
+            <img src={assets.razorpay_logo} className=' h-5 mx-4' alt="" />
+          </div> */}
+
+          <div onClick={()=>setMethod('cod')} className=" flex items-center gap-3 border p-2 px-3 cursor-pointer">
             <p className={`min-w-3.5 h-3.5 border rounded-full ${method=='cod' ? ' bg-green-500':''}`}></p>
             {/* <img src={assets.cashOnDelivery} className=' h-5 mx-4' alt="" /> */}
             <p className=' text-gray-500 text-sm font-medium mx-4 '>CASH ON DELIVERY</p>

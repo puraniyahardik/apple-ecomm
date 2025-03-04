@@ -162,7 +162,7 @@ const Add = ({token}) => {
       </div>
 
       <div className=' flex gap-2 mt-2'>
-        <input type="checkbox" id='bestseller' onChange={()=>bestseller ? setBestseller(false) :setBestseller(true) } />
+        <input type="checkbox" id='bestseller' onChange={()=>bestseller ? setBestseller(false) : setBestseller(true) } />
         <label className=' cursor-pointer' htmlFor="bestseller">Add to bestseller</label>
       </div>
 

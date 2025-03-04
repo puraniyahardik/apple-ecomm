@@ -19,6 +19,7 @@ import { useContext } from 'react'
 import { ShopContext } from './context/ShopContext'
 import Profile from './pages/Profile'
 import ResetPassword from './pages/ResetPassword'
+import TrackOrder from './pages/TrackOrder'
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
             <Route path='/reset-password' element={<ResetPassword />} />
             <Route path='/placeorder' element={<Placeorder />} />
             <Route path='/orders' element={<Orders />} />
+            <Route path='/track/:orderId' element={<TrackOrder />}/>
             <Route path='/verify' element={<Verify />} />
             <Route path='/profile' element={<Profile />} />
           </Routes>

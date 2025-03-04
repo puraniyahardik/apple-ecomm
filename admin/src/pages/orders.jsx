@@ -33,7 +33,7 @@ const Orders = ({ token }) => {
 
   const StatusHandler=async(event,orderId)=>{
     try {
-      const respones=await axios.post(`${BackendUrl}/api/order/status`,{orderId,status:event.target.value},{headers:{token}})
+      const respones=await axios.post(`${backendUrl}/api/order/status`,{orderId,status:event.target.value},{headers:{token}})
       if(respones.data.success){
         await fetchAllOrders()
         toast.success(respones.data.message)
